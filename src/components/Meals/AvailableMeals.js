@@ -26,8 +26,6 @@ const AvailableMeals = () => {
     } catch (error) {
       setError(error.message);
     }
-
-    fetchMeals();
     setIsLoading(false);
   }, []);
 
@@ -49,7 +47,7 @@ const AvailableMeals = () => {
     ));
   }
   if (error) {
-    mealsList = <p>{error}</p>
+    mealsList = <p>{error.message}</p>
   }
   if (isLoading) {
     mealsList = <p>Loading...</p>
