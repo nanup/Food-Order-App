@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 import styles from "./Checkout.module.css";
 
 const isEmpty = value => {
-  console.log("yea")
   return value.trim() === "";
 }
 
@@ -34,7 +33,7 @@ const Checkout = (props) => {
 
     const enteredNameIsValid = !isEmpty(enteredName);
     const enteredStreetIsValid = !isEmpty(enteredStreet);
-    const enteredPostalcodeIsValid = !isFiveChars(enteredPostalcode);
+    const enteredPostalcodeIsValid = isFiveChars(enteredPostalcode);
     const enteredCityIsValid = !isEmpty(enteredCity);
 
     setFormIsValid({
@@ -50,7 +49,12 @@ const Checkout = (props) => {
       return;
     }
 
-
+    props.onConfirm({
+      name: enteredName,
+      street: enteredStreet,
+      city: enteredCity,
+      postalCode: enteredPostalcode
+    });
   };
 
   return (
