@@ -1,7 +1,9 @@
+import { useCallback, useEffect, useState } from 'react';
+
 import Card from '../UI/Card';
 import MealItem from './MealItem/MealItem';
-import classes from './AvailableMeals.module.css';
-import { useCallback, useEffect, useState } from 'react';
+
+import styles from './AvailableMeals.module.css';
 
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
@@ -12,7 +14,7 @@ const AvailableMeals = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("https://test-app-fb5e3-default-rtdb.asia-southeast1.firebasedatabase.app/meals.json", {
+      const response = await fetch("https://platepal-app-default-rtdb.asia-southeast1.firebasedatabase.app/meals.json", {
         method: "GET"
       })
 
@@ -21,13 +23,25 @@ const AvailableMeals = () => {
       }
 
       const data = await response.json();
-      setMeals(Object.values(data));
+      
+      const mealsObject = Object.values(data);
+
+      for (let index in mealsObject) {
+        meals.push({
+          id: mealsObject[index].id,
+          title: mealsObject[index].title,
+          price: mealsObject[index].price,
+          description: mealsObject[index].description,
+        })
+      }
+
+      setMeals(meals);
 
     } catch (error) {
       setError(error.message);
     }
     setIsLoading(false);
-  }, []);
+  }, [meals]);
 
   useEffect(() => {
     fetchMeals();
@@ -40,7 +54,7 @@ const AvailableMeals = () => {
       <MealItem
         key={meal.id}
         id={meal.id}
-        name={meal.name}
+        name={meal.title}
         description={meal.description}
         price={meal.price}
       />
@@ -54,7 +68,7 @@ const AvailableMeals = () => {
   }
 
   return (
-    <section className={classes.meals}>
+    <section className={styles.meals}>
       <Card>
         <ul>{mealsList}</ul>
       </Card>

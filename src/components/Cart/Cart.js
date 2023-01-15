@@ -1,26 +1,30 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
+
+import { useSelector } from "react-redux";
+import { cartContentsActions } from "../../store/cartContents-slice";
 
 import Modal from '../UI/Modal';
 import CartItem from './CartItem';
-import classes from './Cart.module.css';
-import CartContext from '../../store/cart-context';
 import Checkout from './Checkout';
+
+import classes from './Cart.module.css';
 
 const Cart = (props) => {
   const [isCheckout, setIsCheckout] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [didSubmit, setDidSubmit] = useState(false);
-  const cartCtx = useContext(CartContext);
 
-  const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
-  const hasItems = cartCtx.items.length > 0;
+  const cartContents = useSelector(state => state.cartContents);
+
+  const totalAmount = `₹${cartContents.totalAmount}`;
+  const hasItems = cartContents.items.length > 0;
 
   const cartItemRemoveHandler = (id) => {
-    cartCtx.removeItem(id);
+    cartContentsActions.removeFromCart(id);
   };
 
   const cartItemAddHandler = (item) => {
-    cartCtx.addItem(item);
+    cartContentsActions.addToCart(item);
   };
 
   const orderHandler = () => {
@@ -29,24 +33,24 @@ const Cart = (props) => {
 
   const submitOrderHandler = async (userData) => {
     setIsSubmitting(true);
-    await fetch('https://test-app-fb5e3-default-rtdb.asia-southeast1.firebasedatabase.app/orders.json', {
+    await fetch('https://platepal-app-default-rtdb.asia-southeast1.firebasedatabase.app/orders.json', {
       method: 'POST',
       body: JSON.stringify({
         user: userData,
-        orderedItems: cartCtx.items,
+        orderedItems: cartContents.items,
       }),
     });
     setIsSubmitting(false);
     setDidSubmit(true);
-    cartCtx.clearCart();
+    cartContentsActions.clearCart();
   };
 
   const cartItems = (
     <ul className={classes['cart-items']}>
-      {cartCtx.items.map((item) => (
+      {cartContents.items.map((item) => (
         <CartItem
           key={item.id}
-          name={item.name}
+          name={item.title}
           amount={item.amount}
           price={item.price}
           onRemove={cartItemRemoveHandler.bind(null, item.id)}
