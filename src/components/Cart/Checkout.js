@@ -7,7 +7,7 @@ const isEmpty = value => {
 }
 
 const isFiveChars = value => {
-  return value.trim().length === 5;
+  return value.trim().length === 6;
 }
 
 const Checkout = (props) => {
