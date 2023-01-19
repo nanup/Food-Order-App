@@ -14,9 +14,9 @@ const MealItem = (props) => {
     dispatchFn(cartContentsActions.addItem(
       {
         id: props.id,
-        name: props.title,
+        name: props.name,
         amount: amount,
-        price: price
+        price: props.price
       }
     ));
   };

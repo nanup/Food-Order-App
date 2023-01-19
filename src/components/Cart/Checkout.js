@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+
 import styles from "./Checkout.module.css";
 
 const isEmpty = value => {
@@ -16,7 +17,6 @@ const Checkout = (props) => {
     city: true,
     postalCode: true
   });
-
 
   const nameInputRef = useRef();
   const streetInputRef = useRef();

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { cartContentsActions } from "../../store/cartContents-slice";
 
 import Modal from '../UI/Modal';
@@ -13,18 +13,17 @@ const Cart = (props) => {
   const [isCheckout, setIsCheckout] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [didSubmit, setDidSubmit] = useState(false);
+  const dispatchFn = useDispatch();
 
   const cartContents = useSelector(state => state.cartContents);
-
-  const totalAmount = `₹${cartContents.totalAmount}`;
   const hasItems = cartContents.items.length > 0;
 
   const cartItemRemoveHandler = (id) => {
-    cartContentsActions.removeFromCart(id);
+    dispatchFn(cartContentsActions.removeItem(id));
   };
 
   const cartItemAddHandler = (item) => {
-    cartContentsActions.addToCart(item);
+    dispatchFn(cartContentsActions.addItem(item));
   };
 
   const orderHandler = () => {
@@ -42,19 +41,21 @@ const Cart = (props) => {
     });
     setIsSubmitting(false);
     setDidSubmit(true);
-    cartContentsActions.clearCart();
+    dispatchFn(cartContentsActions.clearCart());
   };
+
 
   const cartItems = (
     <ul className={classes['cart-items']}>
       {cartContents.items.map((item) => (
         <CartItem
           key={item.id}
-          name={item.title}
+          id={item.id}
+          name={item.name}
           amount={item.amount}
           price={item.price}
           onRemove={cartItemRemoveHandler.bind(null, item.id)}
-          onAdd={cartItemAddHandler.bind(null, item)}
+          onAdd={cartItemAddHandler.bind(null, {...item, amount: 1})}
         />
       ))}
     </ul>
@@ -78,7 +79,7 @@ const Cart = (props) => {
       {cartItems}
       <div className={classes.total}>
         <span>Total Amount</span>
-        <span>{totalAmount}</span>
+        <span>{`₹${cartContents.totalAmount}`}</span>
       </div>
       {isCheckout && (
         <Checkout onConfirm={submitOrderHandler} onCancel={props.onClose} />
