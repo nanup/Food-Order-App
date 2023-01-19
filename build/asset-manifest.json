@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/platepal/static/css/main.134ab259.chunk.css",
-    "main.js": "/platepal/static/js/main.39501166.chunk.js",
-    "main.js.map": "/platepal/static/js/main.39501166.chunk.js.map",
-    "runtime-main.js": "/platepal/static/js/runtime-main.30bb4cce.js",
-    "runtime-main.js.map": "/platepal/static/js/runtime-main.30bb4cce.js.map",
-    "static/js/2.4181af25.chunk.js": "/platepal/static/js/2.4181af25.chunk.js",
-    "static/js/2.4181af25.chunk.js.map": "/platepal/static/js/2.4181af25.chunk.js.map",
-    "index.html": "/platepal/index.html",
-    "static/css/main.134ab259.chunk.css.map": "/platepal/static/css/main.134ab259.chunk.css.map",
-    "static/js/2.4181af25.chunk.js.LICENSE.txt": "/platepal/static/js/2.4181af25.chunk.js.LICENSE.txt",
-    "static/media/meals.d872017a.jpg": "/platepal/static/media/meals.d872017a.jpg"
+    "main.css": "/FoodOrderApp/static/css/main.134ab259.chunk.css",
+    "main.js": "/FoodOrderApp/static/js/main.39501166.chunk.js",
+    "main.js.map": "/FoodOrderApp/static/js/main.39501166.chunk.js.map",
+    "runtime-main.js": "/FoodOrderApp/static/js/runtime-main.f19a8e58.js",
+    "runtime-main.js.map": "/FoodOrderApp/static/js/runtime-main.f19a8e58.js.map",
+    "static/js/2.4181af25.chunk.js": "/FoodOrderApp/static/js/2.4181af25.chunk.js",
+    "static/js/2.4181af25.chunk.js.map": "/FoodOrderApp/static/js/2.4181af25.chunk.js.map",
+    "index.html": "/FoodOrderApp/index.html",
+    "static/css/main.134ab259.chunk.css.map": "/FoodOrderApp/static/css/main.134ab259.chunk.css.map",
+    "static/js/2.4181af25.chunk.js.LICENSE.txt": "/FoodOrderApp/static/js/2.4181af25.chunk.js.LICENSE.txt",
+    "static/media/meals.d872017a.jpg": "/FoodOrderApp/static/media/meals.d872017a.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.30bb4cce.js",
+    "static/js/runtime-main.f19a8e58.js",
     "static/js/2.4181af25.chunk.js",
     "static/css/main.134ab259.chunk.css",
     "static/js/main.39501166.chunk.js"
